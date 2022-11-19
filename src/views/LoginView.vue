@@ -34,11 +34,13 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useAppTemplateStore } from '@/stores/appTemplateStore'
+import { storeToRefs } from 'pinia'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
 
 const appTemplateStore = useAppTemplateStore()
-const { options, getUserFromJwt } = appTemplateStore
+const { options } = storeToRefs(appTemplateStore)
+const { getUser } = appTemplateStore
 
 
 const userInput = reactive({
@@ -72,7 +74,7 @@ const login = async () => {
         // TODO: secure, samesite, expires etc
         VueCookies.set('jwt', jwt)
 
-        await getUserFromJwt(jwt)
+        await getUser(jwt)
 
         
 

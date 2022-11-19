@@ -10,14 +10,19 @@
             <!-- TODO: Logo -->
 
 
-            <v-app-bar-title>{{ finalOptions.title }}</v-app-bar-title>
+            <v-app-bar-title>{{ options.title }}</v-app-bar-title>
             <template v-slot:append>
                 <!-- Can there be multiple items here? -->
+
+                
                 <v-btn icon="mdi-login" :to="{name: 'login'}"></v-btn>
+
+
             </template>
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer">
+            <!-- TODO: Navigation slot -->
         </v-navigation-drawer>
 
         <v-main class="bg-grey-lighten-4">
@@ -35,38 +40,14 @@
     </v-app>
 </template>
 
-<script>
-export default {
-    name: 'MainLayout',
-    props: {
-        options: {
-            type: Object,
-        },
-    },
-    data() {
-        return {
-            drawer: null,
-            defaultOptions: {
-                title: 'My Vuetify 3 Application',
-                // colors.header or header.color ?
-                colors: {
-                    header: '#444444',
-                },
-                header: {
-                    logo: '',
-                    color: '#444444'
-                }
-            }
-        }
-    },
-    computed: {
-        finalOptions() {
-            // NOT NICE, FIND SHORTER WAY TO ACHIEVE THIS
-            return {
-                ...this.defaultOptions,
-                ...this.options
-            }
-        }
-    }
-}
+<script setup>
+import { useAppTemplateStore } from '@/stores/appTemplateStore'
+import { storeToRefs } from 'pinia'
+import { ref, reactive } from 'vue'
+
+const appTemplateStore = useAppTemplateStore()
+const { options } = storeToRefs(appTemplateStore)
+
+const drawer = ref(false)
+
 </script>

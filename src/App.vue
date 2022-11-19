@@ -13,6 +13,7 @@ export default {
   data(){
     return {
       options: {
+        title: 'This is an example',
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
         identification_url: 'https://api.users.maximemoreillon.com/v2/users/self'
       }
