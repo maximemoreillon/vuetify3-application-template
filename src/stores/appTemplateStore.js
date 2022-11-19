@@ -1,14 +1,12 @@
 import { defineStore } from 'pinia'
 
-export const appTemplateStore = defineStore('appTemplate', {
+export const useAppTemplateStore = defineStore('appTemplate', {
     state: () => ({
-        
-        user: null  
+        templateState: 'initial',
+        options: null,
+        user: null
     }),
     actions: {
-        set_user(user) {
-            this.user = user
-        },
 
     },
 })

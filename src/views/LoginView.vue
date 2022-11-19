@@ -9,70 +9,82 @@
             
                     <v-text-field label="Password" type="Password" v-model="userInput.password" />
             
-                    <v-btn dark type="submit" @click="login" :loading="processing">
-                        <v-icon>mdi-login</v-icon>
-                        <span class="ml-2">Login</span>
+                    <v-btn dark type="submit" :loading="processing">
+                        <v-icon left>mdi-login</v-icon>
+                        <span>Login</span>
                     </v-btn>
-            
-            
-                    <v-snackbar color="#C00000" dark v-model="snack">
-                        {{ snack_text }}
-            
-                        <template v-slot:action="{ attrs }">
-                            <v-btn icon v-bind="attrs" @click="snack = false">
-                                <v-icon>mdi-close</v-icon>
-                            </v-btn>
-                        </template>
-                    </v-snackbar>
-            
+     
                 </v-form>
             </v-card-text>
         </v-card>
+
+        <v-snackbar :color="snackbar.color" dark v-model="snackbar.show">
+            {{ snackbar.text }}
+        
+            <template v-slot:action="{ attrs }">
+                <v-btn icon v-bind="attrs" @click="snackbar.show = false">
+                    <v-icon>mdi-close</v-icon>
+                </v-btn>
+            </template>
+        
+        </v-snackbar>
     </v-container>
 </template>
 
-<script>
-
-
+<script setup>
+import { ref, reactive } from 'vue'
+import { useAppTemplateStore } from '@/stores/appTemplateStore'
 import axios from 'axios'
-
-export default {
-    name: 'LoginForm',
-    props: {
-        options: Object,
-    },
-
-    data() {
-        return {
-            userInput: {
-                identifier: '',
-                password: '',
-            },
-            snack: null,
-            snack_text: '',
-            processing: false,
-        }
-    },
-    methods: {
-        async login() {
-            // Exchange credentials for JWT
-
-            const url = this.options.login_url
-            const body = this.userInput
-
-            this.snack = null
-            this.processing = true
-
-            const { data } = await axios.post(url, body)
-            cobnsole.log(data)
-
-
-        },
+import VueCookies from 'vue-cookies'
 
 
 
-    },
+const appTemplateStore = useAppTemplateStore
+const { options } = appTemplateStore
 
+
+console.log(options)
+
+const userInput = reactive({
+    identifier: '',
+    password: '',
+})
+
+const snackbar = reactive({
+    text: '',
+    show: false,
+    color: 'error'
+})
+
+const processing = ref(false)
+
+
+const login = async () => {
+    // Exchange credentials for JWT
+
+    const url = options.login_url
+    const body = userInput
+
+    snackbar.show = false
+    processing.value = true
+
+    try {
+        const { data } = await axios.post(url, body)
+        const { jwt } = data
+        VueCookies.set('jwt', jwt)
+
+        // TODO: Store jwt in either cookies or localstorage according to options
+    } catch (error) {
+        snackbar.show = true
+        snackbar.text = 'Login failed'
+
+        console.error(error)
+    } finally {
+        processing.value = false
+    }
+
+    
 }
+
 </script>
 

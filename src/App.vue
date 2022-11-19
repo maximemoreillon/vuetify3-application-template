@@ -1,5 +1,5 @@
 <template>
-  <AppTemplate />
+  <AppTemplate :options="options"/>
 </template>
 
 <script>
@@ -9,6 +9,14 @@ export default {
   name: 'App',
   components: {
     AppTemplate
+  },
+  data(){
+    return {
+      options: {
+        login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
+        identification_url: 'https://api.users.maximemoreillon.com/v2/auth/login'
+      }
+    }
   }
 }
 
