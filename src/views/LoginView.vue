@@ -37,13 +37,9 @@ import { useAppTemplateStore } from '@/stores/appTemplateStore'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
 
+const appTemplateStore = useAppTemplateStore()
+const { options, getUserFromJwt } = appTemplateStore
 
-
-const appTemplateStore = useAppTemplateStore
-const { options } = appTemplateStore
-
-
-console.log(options)
 
 const userInput = reactive({
     identifier: '',
@@ -71,9 +67,15 @@ const login = async () => {
     try {
         const { data } = await axios.post(url, body)
         const { jwt } = data
-        VueCookies.set('jwt', jwt)
 
         // TODO: Store jwt in either cookies or localstorage according to options
+        // TODO: secure, samesite, expires etc
+        VueCookies.set('jwt', jwt)
+
+        await getUserFromJwt(jwt)
+
+        
+
     } catch (error) {
         snackbar.show = true
         snackbar.text = 'Login failed'

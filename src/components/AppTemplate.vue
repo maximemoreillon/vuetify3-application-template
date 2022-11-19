@@ -10,7 +10,7 @@ const props = defineProps({
   options: { type: Object }
 })
 
-const appTemplateStore = useAppTemplateStore
+const appTemplateStore = useAppTemplateStore()
 
 appTemplateStore.options = props.options
 

@@ -14,7 +14,7 @@ export default {
     return {
       options: {
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
-        identification_url: 'https://api.users.maximemoreillon.com/v2/auth/login'
+        identification_url: 'https://api.users.maximemoreillon.com/v2/users/self'
       }
     }
   }
