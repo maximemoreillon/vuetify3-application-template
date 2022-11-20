@@ -13,20 +13,26 @@
 
     </v-form>
 
+    <v-snackbar :color="snackbar.color" dark v-model="snackbar.show">
+        {{ snackbar.text }}
+    
+        <template v-slot:action="{ attrs }">
+            <v-btn icon v-bind="attrs" @click="snackbar.show = false">
+                <v-icon>mdi-close</v-icon>
+            </v-btn>
+        </template>
+    </v-snackbar>
+
+
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue'
 import { state, actions } from '@/templateStore'
 
-import { useRouter } from 'vue-router'
-
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
 
-
-
-const router = useRouter()
 
 const userInput = reactive({
     identifier: '',
@@ -59,14 +65,21 @@ const login = async () => {
 
         await actions.getUser(jwt)
 
-        // TODO: access whatever the user was accessing
-        router.push('/')
-
     } catch (error) {
-        snackbar.show = true
-        snackbar.text = 'Login failed'
 
-        console.error(error)
+
+        snackbar.show = true
+        snackbar.color = 'error'
+
+        if (error.response) {
+            snackbar.text = error.response.data
+            console.error(error.response.data)
+        }
+        else {
+            snackbar.text = `Error while logging in`
+            console.error(error)
+        }
+
     } finally {
         logging_in.value = false
     }

@@ -4,7 +4,7 @@
       <!-- TODO: Make component -->
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </template>
-    <template v-else-if="!state.user  && authenticationRequired ">
+    <template v-else-if="!state.user && authenticationRequired ">
       <LoginForm />
     </template>
     <template v-else>
