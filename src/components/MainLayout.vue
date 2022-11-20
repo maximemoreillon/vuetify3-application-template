@@ -14,8 +14,13 @@
             <template v-slot:append>
                 <!-- Can there be multiple items here? -->
 
-                
-                <v-btn icon="mdi-login" :to="{name: 'login'}"></v-btn>
+                <template v-if="user">
+                    <v-btn icon="mdi-logout" @click="logout()"></v-btn>
+
+                </template>
+                <template v-else>
+                    <v-btn icon="mdi-login" :to="{name: 'login'}"></v-btn>
+                </template>
 
 
             </template>
@@ -23,6 +28,10 @@
 
         <v-navigation-drawer v-model="drawer">
             <!-- TODO: Navigation slot -->
+            <v-list nav>
+                <v-list-item prepend-icon="mdi-home" title="Home" :to="{name: 'home'}"></v-list-item>
+                <v-list-item prepend-icon="mdi-information-outline" title="About" :to="{name: 'about'}"></v-list-item>
+            </v-list>
         </v-navigation-drawer>
 
         <v-main class="bg-grey-lighten-4">
@@ -43,11 +52,14 @@
 <script setup>
 import { useAppTemplateStore } from '@/stores/appTemplateStore'
 import { storeToRefs } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
 const appTemplateStore = useAppTemplateStore()
-const { options } = storeToRefs(appTemplateStore)
+const { options, user } = storeToRefs(appTemplateStore)
+const { logout } = appTemplateStore
 
 const drawer = ref(false)
+
+
 
 </script>

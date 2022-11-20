@@ -1,16 +1,7 @@
-/**
- * main.js
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
 
-// Components
 import App from './App.vue'
 import router from './router'
-
-// Composables
-import { createApp } from 'vue'
-
+import { createApp, markRaw } from 'vue'
 import { createPinia } from 'pinia'
 
 // Plugins
@@ -20,6 +11,11 @@ const app = createApp(App)
 const pinia = createPinia()
 
 registerPlugins(app)
+
+// Allowing pinia to use the router
+pinia.use(({ store }) => {
+  store.$router = markRaw(router)
+})
 
 app
     .use(pinia)

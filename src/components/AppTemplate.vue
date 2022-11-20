@@ -4,7 +4,10 @@
 </template>
 
 <script setup>
+
+// TODO: See if can use import { useRouter, useRoute } from 'vue-router'
 import router from '@/router'
+
 import { useAppTemplateStore } from '@/stores/appTemplateStore'
 import { storeToRefs } from 'pinia'
 
@@ -19,18 +22,18 @@ const props = defineProps({
 options.value = props.options
 
 
-
-
 // Navigation guards
 router.beforeEach( async (to, from) => {
 
+  // Allow user to access login page without checking identify
+  // maybe not a good idea
+  if (to.name === 'login') return
   // Check if user is logged in
   await getUser()
-
-  if (!user.value) {
-    if (to.name !== 'login') return { name: 'login' }
-    return
-  }
+  if (!user.value) return { name: 'login' }
+  return
+  
+  
 })
 
 

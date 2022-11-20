@@ -35,13 +35,16 @@
 import { ref, reactive } from 'vue'
 import { useAppTemplateStore } from '@/stores/appTemplateStore'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
 
 const appTemplateStore = useAppTemplateStore()
 const { options } = storeToRefs(appTemplateStore)
-const { getUser } = appTemplateStore
+const { getUser, beforeRouteEnter } = appTemplateStore
 
+const router = useRouter()
 
 const userInput = reactive({
     identifier: '',
@@ -55,19 +58,19 @@ const snackbar = reactive({
 })
 
 const processing = ref(false)
+const from = ref()
 
 
 const login = async () => {
     // Exchange credentials for JWT
 
-    const url = options.login_url
-    const body = userInput
+    const { login_url } = options.value
 
     snackbar.show = false
     processing.value = true
 
     try {
-        const { data } = await axios.post(url, body)
+        const { data } = await axios.post(login_url, userInput)
         const { jwt } = data
 
         // TODO: Store jwt in either cookies or localstorage according to options
@@ -75,6 +78,11 @@ const login = async () => {
         VueCookies.set('jwt', jwt)
 
         await getUser(jwt)
+
+        // TODO: access whatever the user was accessing
+        router.push('/')
+
+
 
         
 

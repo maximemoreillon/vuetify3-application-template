@@ -1,17 +1,10 @@
 <template>
     <v-card>
         <v-card-title>
-            Home
+            About
         </v-card-title>
         <v-card-text>
-            This is home
+            This is a about
         </v-card-text>
     </v-card>
 </template>
-
-<script setup>
-
-
-
-
-</script>

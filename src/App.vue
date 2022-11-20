@@ -1,5 +1,7 @@
 <template>
-  <AppTemplate :options="options"/>
+  <AppTemplate :options="options">
+    <!-- PASSING NAV IS A PROBLEM -->
+  </AppTemplate>
 </template>
 
 <script>

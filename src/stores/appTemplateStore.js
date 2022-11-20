@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
 
+const jwtKey = 'jwt'
+
 export const useAppTemplateStore = defineStore('appTemplate', {
     state: () => ({
         templateState: 'initial',
@@ -11,21 +13,22 @@ export const useAppTemplateStore = defineStore('appTemplate', {
     actions: {
 
         async getUser() {
-            const jwt = VueCookies.get('jwt')
-            const { identification_url: url } = this.options
-            const headers = { authorization: `Bearer ${jwt}` }
-            const { data } = await axios.get(url, { headers })
-            this.user = data
+            try {
+                const jwt = VueCookies.get(jwtKey)
+                const { identification_url: url } = this.options
+                const headers = { authorization: `Bearer ${jwt}` }
+                const { data } = await axios.get(url, { headers })
+                this.user = data
+            } catch (error) {
+                this.user = null
+            }
+            
         },
 
-        async getUserFromJwt(jwt){
-            const { identification_url: url } = this.options
-            const headers = { authorization: `Bearer ${jwt}`}
-            const { data } = await axios.get(url, { headers })
-            this.user = data
-        },
-        logout(){
-            alert('not implemented')
+        async logout(){
+            VueCookies.remove(jwtKey)
+            this.user = null
+            this.$router.push({ name: 'login' })
         }
     },
 })
