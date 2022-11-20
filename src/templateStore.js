@@ -17,8 +17,8 @@ export const actions = {
             const { identification_url: url } = state.options
             const headers = { authorization: `Bearer ${jwt}` }
             const { data } = await axios.get(url, { headers })
-            
             state.user = data
+            console.log('User authenticated')
         } catch (error) {
             console.error(error)
             state.user = null

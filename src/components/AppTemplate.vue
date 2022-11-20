@@ -1,14 +1,67 @@
 <template>
-  <!-- app, app-bar and stuff in MainLayout, which is a top-level view -->
-  <RouterView />
+  <v-app>
+
+    <template v-if="state.user">
+      <v-app-bar color="primary">
+      
+        <template v-slot:prepend>
+          <v-app-bar-nav-icon @click="drawer = !drawer" />
+      
+        </template>
+      
+        <!-- TODO: Fix too close to nav icon -->
+        <v-img max-width="2.5em" max-height="2.5em" src="https://cdn.maximemoreillon.com/logo/thick/logo.png"></v-img>
+      
+      
+        <v-app-bar-title>{{ state.options.title }}</v-app-bar-title>
+      
+        <template v-slot:append>
+          <!-- Can there be multiple items here? -->
+      
+          <v-btn icon="mdi-logout" @click="logout()"></v-btn>
+      
+      
+      
+        </template>
+      </v-app-bar>
+      
+      <v-navigation-drawer v-model="drawer">
+        <!-- TODO: Find way to pass navigation -->
+
+        <slot name="nav" />
+
+        
+
+      </v-navigation-drawer>
+      
+      <!-- TODO: background color customizable -->
+      <v-main class="bg-grey-lighten-4">
+        <v-container>
+          <RouterView />
+        </v-container>
+      </v-main>
+      
+      <v-footer app class="bg-grey-lighten-4">
+        <!-- TODO: Make actual footer -->
+        {{ state.options.title }} - {{ state.options.author }}
+      </v-footer>
+    </template>
+    <template v-else>
+      <LoginForm />
+    </template>
+  
+    
+  
+  
+  </v-app>
 </template>
 
 <script setup>
-
-// TODO: See if can use import { useRouter, useRoute } from 'vue-router'
-import router from '@/router'
-
+import { ref } from 'vue'
 import { state, actions } from '@/templateStore'
+import LoginForm from '@/components/LoginForm.vue'
+
+const drawer = ref(false)
 
 
 const props = defineProps({
@@ -16,22 +69,12 @@ const props = defineProps({
 })
 
 state.options = props.options
+const { getUser, logout } = actions
+
+getUser()
 
 
-// Navigation guards
-router.beforeEach( async (to, from) => {
 
-
-  // Allow user to access login page without checking identify
-  // maybe not a good idea
-  if (to.name === 'login') return
-  // Check if user is logged in
-  await actions.getUser()
-  if (!state.user) return { name: 'login' }
-  return
-  
-  
-})
 
 
 

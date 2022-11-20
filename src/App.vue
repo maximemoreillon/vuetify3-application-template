@@ -1,6 +1,15 @@
 <template>
   <AppTemplate :options="options">
-    <!-- PASSING NAV IS A PROBLEM -->
+    
+      <template v-slot:nav>
+        <v-list nav>
+          <v-list-item prepend-icon="mdi-home" title="Home" :to="{ name: 'home' }"></v-list-item>
+          <v-list-item prepend-icon="mdi-information-outline" title="About" :to="{ name: 'about' }"></v-list-item>
+        </v-list>
+      </template>
+
+    
+
   </AppTemplate>
 </template>
 
