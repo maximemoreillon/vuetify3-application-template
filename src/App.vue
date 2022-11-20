@@ -1,12 +1,16 @@
 <template>
   <AppTemplate :options="options">
+
+    <!-- Default slot: Router view -->
+    <RouterView />
     
-      <template v-slot:nav>
-        <!-- <v-list nav>
-          <v-list-item prepend-icon="mdi-home" title="Home" :to="{ name: 'home' }"></v-list-item>
-          <v-list-item prepend-icon="mdi-information-outline" title="About" :to="{ name: 'about' }"></v-list-item>
-        </v-list> -->
-      </template>
+    <!-- Nav slot -->
+    <template v-slot:nav>
+      <v-list nav>
+        <v-list-item prepend-icon="mdi-home" title="Home" :to="{ name: 'home' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-information-outline" title="About" :to="{ name: 'about' }"></v-list-item>
+      </v-list>
+    </template>
 
     
 
@@ -28,9 +32,9 @@ export default {
         author: 'Maxime Moreillon',
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
         identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
-        nav: [
-          { icon: 'mdi-home', title: 'Home', to: {name: 'home'}}
-        ]
+        // nav: [
+        //   { icon: 'mdi-home', title: 'Home', to: {name: 'home'}}
+        // ]
       }
     }
   }

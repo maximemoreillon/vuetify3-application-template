@@ -2,7 +2,15 @@
   <v-app>
     <AuthenticatingProgress v-if="state.authenticating"/>
     <LoginForm v-else-if="!state.user && authenticationRequired "/>
-    <AppLayout v-else/>  
+    <AppLayout v-else>
+
+      <slot></slot>
+
+      <template v-slot:nav>
+        <slot name="nav"></slot>
+      </template>
+      
+    </AppLayout>  
   </v-app>
 </template>
 

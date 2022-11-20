@@ -1,6 +1,19 @@
 {
   "name": "vuetify3-application-template",
-  "version": "0.0.0",
+  "version": "0.0.4",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vuetify3-application-template.umd.cjs",
+  "module": "./dist/vuetify3-application-template.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vuetify3-application-template.js",
+      "require": "./dist/vuetify3-application-template.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

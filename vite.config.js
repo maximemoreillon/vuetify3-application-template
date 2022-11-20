@@ -6,6 +6,10 @@ import vuetify from 'vite-plugin-vuetify'
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
+// Added for NPM publish
+import { resolve } from 'path'
+
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -33,4 +37,25 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  // Options to build an NPM package
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'lib/main.js'),
+      name: 'AppTemplate',
+      // the proper extensions will be added
+      fileName: 'vuetify3-application-template'
+    },
+    rollupOptions: {
+      // make sure to externalize deps that shouldn't be bundled
+      // into your library
+      external: ['vue'],
+      output: {
+        // Provide global variables to use in the UMD build
+        // for externalized deps
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    }
+  }
 })

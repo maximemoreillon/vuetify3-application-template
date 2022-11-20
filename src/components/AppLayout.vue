@@ -36,7 +36,7 @@
   
   <v-main class="bg-grey-lighten-4">
     <v-container>
-      <RouterView />
+      <slot></slot>
     </v-container>
   </v-main>
   
