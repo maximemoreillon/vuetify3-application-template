@@ -6,7 +6,7 @@
 
         <v-text-field label="Password" type="Password" v-model="userInput.password" />
 
-        <v-btn dark type="submit" :loading="processing">
+        <v-btn dark type="submit" :loading="logging_in">
             <v-icon left>mdi-login</v-icon>
             <span>Login</span>
         </v-btn>
@@ -39,9 +39,7 @@ const snackbar = reactive({
     color: 'error'
 })
 
-const processing = ref(false)
-const from = ref()
-
+const logging_in = ref(false)
 
 const login = async () => {
     // Exchange credentials for JWT
@@ -49,7 +47,7 @@ const login = async () => {
     const { login_url } = state.options
 
     snackbar.show = false
-    processing.value = true
+    logging_in.value = true
 
     try {
         const { data } = await axios.post(login_url, userInput)
@@ -64,17 +62,13 @@ const login = async () => {
         // TODO: access whatever the user was accessing
         router.push('/')
 
-
-
-
-
     } catch (error) {
         snackbar.show = true
         snackbar.text = 'Login failed'
 
         console.error(error)
     } finally {
-        processing.value = false
+        logging_in.value = false
     }
 
 
