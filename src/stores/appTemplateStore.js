@@ -1,3 +1,5 @@
+// This store is currently not used because it relies on Pinia
+
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
@@ -28,7 +30,8 @@ export const useAppTemplateStore = defineStore('appTemplate', {
         async logout(){
             VueCookies.remove(jwtKey)
             this.user = null
-            this.$router.push({ name: 'login' })
+            this.$router.push({ name: '/login' })
+            // TODO: redirect to login page?
         }
     },
 })

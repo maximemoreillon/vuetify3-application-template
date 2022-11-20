@@ -16,6 +16,7 @@ export default {
     return {
       options: {
         title: 'This is an example',
+        author: 'Maxime Moreillon',
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
         identification_url: 'https://api.users.maximemoreillon.com/v2/users/self'
       }

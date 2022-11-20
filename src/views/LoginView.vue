@@ -1,7 +1,8 @@
 <template>
-    <v-container>
-        <v-card max-width="60rem" class="mx-auto">
-            <v-card-title>Login</v-card-title>
+    <!-- TODO: CENTER LOGIN FORM ON SCREEN -->
+    <v-container fluid>
+        <v-card max-width="30rem" class="mx-auto" >
+            <v-card-title>{{ state.options.title }}</v-card-title>
             <v-card-text>
                 <v-form class="text-center" @submit.prevent="login()">
             
@@ -33,16 +34,14 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { useAppTemplateStore } from '@/stores/appTemplateStore'
-import { storeToRefs } from 'pinia'
+import { state, actions } from '@/templateStore'
+
 import { useRouter } from 'vue-router'
 
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
 
-const appTemplateStore = useAppTemplateStore()
-const { options } = storeToRefs(appTemplateStore)
-const { getUser, beforeRouteEnter } = appTemplateStore
+
 
 const router = useRouter()
 
@@ -64,7 +63,7 @@ const from = ref()
 const login = async () => {
     // Exchange credentials for JWT
 
-    const { login_url } = options.value
+    const { login_url } = state.options
 
     snackbar.show = false
     processing.value = true
@@ -77,7 +76,7 @@ const login = async () => {
         // TODO: secure, samesite, expires etc
         VueCookies.set('jwt', jwt)
 
-        await getUser(jwt)
+        await actions.getUser(jwt)
 
         // TODO: access whatever the user was accessing
         router.push('/')
