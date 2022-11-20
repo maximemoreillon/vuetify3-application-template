@@ -2,10 +2,10 @@
   <AppTemplate :options="options">
     
       <template v-slot:nav>
-        <v-list nav>
+        <!-- <v-list nav>
           <v-list-item prepend-icon="mdi-home" title="Home" :to="{ name: 'home' }"></v-list-item>
           <v-list-item prepend-icon="mdi-information-outline" title="About" :to="{ name: 'about' }"></v-list-item>
-        </v-list>
+        </v-list> -->
       </template>
 
     
@@ -27,7 +27,10 @@ export default {
         title: 'This is an example',
         author: 'Maxime Moreillon',
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
-        identification_url: 'https://api.users.maximemoreillon.com/v2/users/self'
+        identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
+        nav: [
+          { icon: 'mdi-home', title: 'Home', to: {name: 'home'}}
+        ]
       }
     }
   }

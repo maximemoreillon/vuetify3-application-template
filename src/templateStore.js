@@ -29,7 +29,7 @@ export const actions = {
             console.error(error)
             state.user = null
         } finally {
-            state.authenticating = false
+            // state.authenticating = false
         }
 
     },

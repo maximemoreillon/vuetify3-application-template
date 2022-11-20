@@ -1,16 +1,8 @@
 <template>
   <v-app>
-    <template v-if="state.authenticating">
-      <!-- TODO: Make component -->
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
-    </template>
-    <template v-else-if="!state.user && authenticationRequired ">
-      <LoginForm />
-    </template>
-    <template v-else>
-      <AppLayout />
-    </template>
-  
+    <AuthenticatingProgress v-if="state.authenticating"/>
+    <LoginForm v-else-if="!state.user && authenticationRequired "/>
+    <AppLayout v-else/>  
   </v-app>
 </template>
 
@@ -19,6 +11,7 @@ import { computed } from 'vue'
 import { state, actions } from '@/templateStore'
 import LoginForm from '@/components/LoginForm.vue'
 import AppLayout from '@/components/AppLayout.vue'
+import AuthenticatingProgress from '@/components/AuthenticatingProgress.vue'
 
 const props = defineProps({
   options: { type: Object }

@@ -1,9 +1,8 @@
 <template>
-  <v-app-bar color="primary">
+  <v-app-bar :color="state.options.appBarColor || '#444444'" theme="dark">
   
     <template v-slot:prepend>
       <v-app-bar-nav-icon @click="drawer = !drawer" />
-  
     </template>
 
 
@@ -21,7 +20,18 @@
   <v-navigation-drawer v-model="drawer">
     <slot name="nav" />
 
-    <!-- TODO: use options.nav as well -->
+    <template v-if="state.options.nav">
+      <v-list nav>
+        <v-list-item 
+          v-for="({icon, title, to}, index) in state.options.nav"
+          :key="`nav_item_${index}`" 
+          :prepend-icon="icon" 
+          :title="title" 
+          :to="to" />
+      </v-list>
+    </template>
+
+  <!-- TODO: use options.nav as well -->
   </v-navigation-drawer>
   
   <v-main class="bg-grey-lighten-4">
