@@ -10,7 +10,10 @@
     <v-img max-width="2.5em" max-height="2.5em" src="https://cdn.maximemoreillon.com/logo/thick/logo.png"></v-img>
   
     <v-app-bar-title>{{ state.options.title }}</v-app-bar-title>
-  
+
+    <!-- Could put extra hader stuff here -->
+    <span>v{{ ver }}</span>
+
     <template v-slot:append>
       <!-- Can there be multiple items here? -->
       <v-btn icon="mdi-logout" @click="logout()"></v-btn>
@@ -48,9 +51,12 @@
 <script setup>
 import { ref } from 'vue'
 import { state, actions } from '@/templateStore'
+import { version } from '../../package.json'
+
+
 
 const drawer = ref(false)
-
+const ver = ref(version)
 const { logout } = actions
 
 

@@ -1,44 +1,56 @@
-# default
+# Vuetify 3 Application template
 
-## Project setup
-
-```
-# yarn
-yarn
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-### Compiles and hot-reloads for development
+## Usage
 
 ```
-# yarn
-yarn dev
+<template>
+  <AppTemplate :options="options">
 
-# npm
-npm run dev
+    <!-- Default slot: Router view -->
+    <RouterView />
+    
+    <!-- Nav slot -->
+    <template v-slot:nav>
+      <v-list nav>
+        <v-list-item prepend-icon="mdi-home" title="Home" :to="{ name: 'home' }"/>
+        <v-list-item prepend-icon="mdi-information-outline" title="About" :to="{ name: 'about' }"/>
+      </v-list>
+    </template>
 
-# pnpm
-pnpm dev
+  </AppTemplate>
+</template>
+
+<script>
+import AppTemplate from 'vuetify3-application-template'
+import 'vuetify3-application-template/dist/style.css'
+
+export default {
+  name: 'App',
+  components: {
+    AppTemplate
+  },
+  data(){
+    return {
+      options: {
+        title: 'My application',
+        author: 'Maxime Moreillon',
+        login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
+        identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
+
+      }
+    }
+  }
+}
+
+</script>
 ```
 
-### Compiles and minifies for production
+
+## Dev commands
+
+Building, Packing and installing package locally
 
 ```
-# yarn
-yarn build
+npm run build && npm pack && npm install vuetify3-application-template-X.Y.Z.tgz
 
-# npm
-npm run build
-
-# pnpm
-pnpm build
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).

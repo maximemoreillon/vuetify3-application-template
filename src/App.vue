@@ -12,13 +12,13 @@
       </v-list>
     </template>
 
-    
-
   </AppTemplate>
 </template>
 
 <script>
-import AppTemplate from '@/components/AppTemplate.vue'
+// import AppTemplate from '@/components/AppTemplate.vue'
+import AppTemplate from 'vuetify3-application-template'
+import 'vuetify3-application-template/dist/style.css'
 
 export default {
   name: 'App',
@@ -28,13 +28,11 @@ export default {
   data(){
     return {
       options: {
-        title: 'This is an example',
+        title: 'My application',
         author: 'Maxime Moreillon',
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
         identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
-        // nav: [
-        //   { icon: 'mdi-home', title: 'Home', to: {name: 'home'}}
-        // ]
+
       }
     }
   }

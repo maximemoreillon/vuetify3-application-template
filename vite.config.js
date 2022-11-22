@@ -40,7 +40,7 @@ export default defineConfig({
   // Options to build an NPM package
   build: {
     lib: {
-      entry: resolve(__dirname, 'lib/main.js'),
+      entry: resolve(__dirname, 'src/components/main.js'),
       name: 'AppTemplate',
       // the proper extensions will be added
       fileName: 'vuetify3-application-template'
@@ -48,7 +48,8 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['vue'],
+      // ADDING VUETIFY HERE DOES NOT HELP
+      external: ['vue', 'vuetify'],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps

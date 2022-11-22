@@ -78,7 +78,6 @@ const login = async () => {
 
     } catch (error) {
 
-
         snackbar.show = true
         snackbar.color = 'error'
 
