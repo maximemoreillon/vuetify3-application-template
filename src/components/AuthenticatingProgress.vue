@@ -1,20 +1,23 @@
 <template>
-    <v-main class="bg-grey-lighten-4 main">
-        <v-progress-circular size="72" indeterminate color="primary"></v-progress-circular>
-        <div>Authenticating...</div>
-    </v-main>
+    <v-card>
+        <v-card-text>
+            <v-row justify="center">
+                <v-col cols="auto">
+                    <v-progress-circular size="72" indeterminate color="primary"></v-progress-circular>
+                </v-col>
+            </v-row>
+            <v-row justify="center">
+                <v-col cols="auto">
+                    Authenticating...
+                </v-col>
+            </v-row>
+            
+        </v-card-text>
+        
+    </v-card>
 </template>
 
 <script setup>
 
 </script>
 
-<style scoped>
-.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-}
-</style>

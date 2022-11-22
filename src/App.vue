@@ -16,9 +16,9 @@
 </template>
 
 <script>
-// import AppTemplate from '@/components/AppTemplate.vue'
-import AppTemplate from 'vuetify3-application-template'
-import 'vuetify3-application-template/dist/style.css'
+import AppTemplate from '@/components/AppTemplate.vue'
+// import AppTemplate from 'vuetify3-application-template'
+// import 'vuetify3-application-template/dist/style.css'
 
 export default {
   name: 'App',

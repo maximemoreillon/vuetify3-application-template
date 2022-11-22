@@ -12,8 +12,9 @@
     <v-app-bar-title>{{ state.options.title }}</v-app-bar-title>
 
     <!-- Could put extra hader stuff here -->
-    <span>v{{ ver }}</span>
+    <slot name="header"></slot>
 
+    <!-- This slot might not be ideal -->
     <template v-slot:append>
       <!-- Can there be multiple items here? -->
       <v-btn icon="mdi-logout" @click="logout()"></v-btn>
@@ -21,7 +22,7 @@
   </v-app-bar>
   
   <v-navigation-drawer v-model="drawer">
-    <slot name="nav" />
+    <slot name="nav" ></slot>
 
     <template v-if="state.options.nav">
       <v-list nav>
@@ -34,7 +35,6 @@
       </v-list>
     </template>
 
-  <!-- TODO: use options.nav as well -->
   </v-navigation-drawer>
   
   <v-main class="bg-grey-lighten-4">

@@ -1,30 +1,26 @@
 <template>
-    <v-main class="bg-grey-lighten-4 main">
 
-            <v-card width="30rem">
-                <v-card-title>
-                    {{ state.options.title}}
-                </v-card-title>
-                <v-card-text>
-                    <v-form class="text-center" @submit.prevent="login()">
-                    
-                        <v-text-field label="Username" v-model="userInput.identifier" />
-                    
-                        <v-text-field label="Password" type="Password" v-model="userInput.password" />
-                    
-                        <v-btn dark type="submit" :loading="logging_in">
-                            <v-icon left>mdi-login</v-icon>
-                            <span>Login</span>
-                        </v-btn>
-                    
-                    </v-form>
-                </v-card-text>
-                
-            </v-card>
+    <v-card width="30rem">
+        <v-card-title>
+            {{ state.options.title}}
+        </v-card-title>
+        <v-card-text>
+            <v-form class="text-center" @submit.prevent="login()">
+            
+                <v-text-field label="Username" v-model="userInput.identifier" />
+            
+                <v-text-field label="Password" type="Password" v-model="userInput.password" />
+            
+                <v-btn dark type="submit" :loading="logging_in">
+                    <v-icon left>mdi-login</v-icon>
+                    <span>Login</span>
+                </v-btn>
+            
+            </v-form>
+        </v-card-text>
+        
+    </v-card>
 
-
-
-    </v-main>
 
     <v-snackbar :color="snackbar.color" dark v-model="snackbar.show">
         {{ snackbar.text }}
@@ -99,12 +95,3 @@ const login = async () => {
 
 </script>
 
-<style scoped>
-
-.main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-</style>
