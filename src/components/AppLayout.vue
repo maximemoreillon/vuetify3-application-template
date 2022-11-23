@@ -1,8 +1,8 @@
 <template>
   <v-app-bar :color="state.options.appBarColor || '#444444'" theme="dark">
   
-    <template v-slot:prepend>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
+    <template v-slot:prepend >
+      <v-app-bar-nav-icon v-if="navExists" @click="drawer = !drawer" />
     </template>
 
 
@@ -19,13 +19,13 @@
     <slot name="header"></slot>
 
     <!-- This slot might not be ideal -->
-    <template v-slot:append>
+    <template v-slot:append v-if="state.user">
       <!-- Can there be multiple items here? -->
       <v-btn icon="mdi-logout" @click="logout()"></v-btn>
     </template>
   </v-app-bar>
   
-  <v-navigation-drawer v-model="drawer">
+  <v-navigation-drawer v-model="drawer" v-if="navExists">
     <slot name="nav" ></slot>
 
     <template v-if="state.options.nav">
@@ -53,13 +53,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, useSlots, computed } from 'vue'
 import { state, actions } from '@/templateStore'
-import { version } from '../../package.json'
 
+const slots = useSlots()
 const drawer = ref(false)
 const { logout } = actions
 
+const props = defineProps({
+  options: { type: Object }
+})
+
+console.log()
+
+const navExists = computed(() => {
+  return state.options.nav || slots.nav()[0].children.length
+})
 
 </script>
 
