@@ -28,6 +28,9 @@ import { state } from '@/templateStore'
 import AppLayout from '@/components/AppLayout.vue'
 import AuthenticationWall from '@/components/AuthenticationWall.vue'
 
+// Ideally, styles would be imported here
+// import 'vuetify3-application-template/dist/style.css'
+
 const props = defineProps({
   options: { type: Object }
 })
