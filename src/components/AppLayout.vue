@@ -7,8 +7,12 @@
 
 
     <!-- TODO:  img like previous template-->
-    <v-img max-width="2.5em" max-height="2.5em" src="https://cdn.maximemoreillon.com/logo/thick/logo.png"></v-img>
-  
+    <!-- <v-img max-width="2.5em" max-height="2.5em" src="https://cdn.maximemoreillon.com/logo/thick/logo.png"></v-img> -->
+    <img 
+      class="header_logo" 
+      :class="{'rotating_logo': !state.options.header_logo}"
+      :src="state.options.header_logo || 'https://cdn.maximemoreillon.com/logo/thick/logo.png'">
+
     <v-app-bar-title>{{ state.options.title }}</v-app-bar-title>
 
     <!-- Could put extra hader stuff here -->
@@ -53,11 +57,32 @@ import { ref } from 'vue'
 import { state, actions } from '@/templateStore'
 import { version } from '../../package.json'
 
-
-
 const drawer = ref(false)
-const ver = ref(version)
 const { logout } = actions
 
 
 </script>
+
+<style>
+.header_logo {
+  max-height: 2.5em;
+  object-fit: scale-down;
+}
+
+.rotating_logo {
+  animation-name: rotating_logo;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotating_logo {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
