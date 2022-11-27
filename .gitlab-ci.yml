@@ -2,6 +2,7 @@ stages:
   - publish
 
 publish:
+  image: node:16
   stage: publish
   tags:
     - moreillon
