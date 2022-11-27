@@ -49,7 +49,9 @@
   
   <v-footer app class="bg-grey-lighten-4 footer text-center">
     <v-row justify="center">
-      <v-col cols="auto">{{ state.options.title }} - {{ state.options.author }}</v-col>
+      <v-col cols="auto">
+        {{ state.options.title }} - {{ state.options.author || 'Maxime Moreillon' }}
+      </v-col>
     </v-row>
     
   </v-footer>
@@ -66,8 +68,6 @@ const { logout } = actions
 const props = defineProps({
   options: { type: Object }
 })
-
-console.log()
 
 const navExists = computed(() => {
   return state.options.nav || slots.nav()[0].children.length
@@ -92,7 +92,6 @@ const navExists = computed(() => {
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
