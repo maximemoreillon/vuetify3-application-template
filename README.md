@@ -36,6 +36,7 @@ export default {
         author: 'Maxime Moreillon',
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
         identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
+        // logo: 'src/assets/logo.png' 
 
       }
     }

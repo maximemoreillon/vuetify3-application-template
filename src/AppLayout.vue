@@ -47,8 +47,11 @@
     </v-container>
   </v-main>
   
-  <v-footer app class="bg-grey-lighten-4">
-    {{ state.options.title }} - {{ state.options.author }}
+  <v-footer app class="bg-grey-lighten-4 footer text-center">
+    <v-row justify="center">
+      <v-col cols="auto">{{ state.options.title }} - {{ state.options.author }}</v-col>
+    </v-row>
+    
   </v-footer>
 </template>
 
@@ -94,4 +97,5 @@ const navExists = computed(() => {
     transform: rotate(360deg);
   }
 }
+
 </style>
