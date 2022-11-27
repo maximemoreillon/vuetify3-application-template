@@ -23,7 +23,7 @@
 
 <script setup>
 
-import { computed, watch} from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import VueCookies from 'vue-cookies'
 
 import { state } from './templateStore'
@@ -37,8 +37,9 @@ const props = defineProps({
 })
 
 
-// Save options into custom store
-state.options = props.options
+onMounted(() => {
+  state.options = props.options
+})
 
 const authenticationRequired = computed(() => {
   return state.options.login_url && state.options.identification_url
