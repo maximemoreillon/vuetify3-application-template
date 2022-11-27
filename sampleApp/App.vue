@@ -1,5 +1,5 @@
 <template>
-  <AppTemplate :options="options">
+  <AppTemplate :options="options" @userChanged="userChangedCallback($event)">
 
     <!-- Default slot: Router view -->
     <RouterView />
@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import AppTemplate from '@/components/AppTemplate.vue'
+import AppTemplate from '../src/AppTemplate.vue'
 // import AppTemplate from 'vuetify3-application-template'
-import 'vuetify3-application-template/dist/style.css'
+// import 'vuetify3-application-template/dist/style.css'
 
 export default {
   name: 'App',
@@ -30,10 +30,22 @@ export default {
       options: {
         title: 'My application',
         author: 'Maxime Moreillon',
-        // login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
-        // identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
-
+        login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
+        identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
+        // logo: '@/sampleApp/assets/logo.png' // I don't get this path
       }
+    }
+  },
+  methods: {
+    userChangedCallback({user,jwt}) {
+
+      // Set Axios headers
+      // This seems to interfere with the template's axios
+      this.axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`
+
+      // Store user info in Pinia
+
+      
     }
   }
 }

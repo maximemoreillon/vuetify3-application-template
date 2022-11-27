@@ -21,6 +21,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
+      // '@': fileURLToPath(new URL('./src', import.meta.url))
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
     extensions: [
@@ -39,7 +40,7 @@ export default defineConfig({
   // Options to build an NPM package
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/components/main.js'),
+      entry: resolve(__dirname, 'src/main.js'),
       name: 'AppTemplate',
       // the proper extensions will be added
       fileName: 'vuetify3-application-template'

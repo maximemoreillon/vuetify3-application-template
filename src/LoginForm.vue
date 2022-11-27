@@ -1,25 +1,19 @@
 <template>
 
-    <v-card width="30rem">
-        <v-card-title>
-            {{ state.options.title}}
-        </v-card-title>
-        <v-card-text>
-            <v-form class="text-center" @submit.prevent="login()">
-            
-                <v-text-field label="Username" v-model="userInput.identifier" />
-            
-                <v-text-field label="Password" type="Password" v-model="userInput.password" />
-            
-                <v-btn dark type="submit" :loading="logging_in">
-                    <v-icon left>mdi-login</v-icon>
-                    <span>Login</span>
-                </v-btn>
-            
-            </v-form>
-        </v-card-text>
-        
-    </v-card>
+
+    <v-form class="text-center" @submit.prevent="login()">
+    
+        <v-text-field label="Username" v-model="userInput.identifier" />
+    
+        <v-text-field label="Password" type="Password" v-model="userInput.password" />
+    
+        <v-btn dark type="submit" :loading="logging_in">
+            <v-icon left>mdi-login</v-icon>
+            <span>Login</span>
+        </v-btn>
+    
+    </v-form>
+
 
 
     <v-snackbar :color="snackbar.color" dark v-model="snackbar.show">
@@ -35,7 +29,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { state, actions } from '@/templateStore'
+import { state, actions } from './templateStore'
 
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
@@ -51,6 +45,7 @@ const snackbar = reactive({
     show: false,
     color: 'error'
 })
+
 
 const logging_in = ref(false)
 
@@ -70,7 +65,7 @@ const login = async () => {
         // TODO: secure, samesite, expires etc
         VueCookies.set('jwt', jwt)
 
-        await actions.getUser(jwt)
+        await actions.getUser()
 
     } catch (error) {
 

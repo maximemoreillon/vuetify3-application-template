@@ -10,8 +10,8 @@
     <!-- <v-img max-width="2.5em" max-height="2.5em" src="https://cdn.maximemoreillon.com/logo/thick/logo.png"></v-img> -->
     <img 
       class="header_logo" 
-      :class="{'rotating_logo': !state.options.header_logo}"
-      :src="state.options.header_logo || 'https://cdn.maximemoreillon.com/logo/thick/logo.png'">
+      :class="{'rotating_logo': !state.options.logo}"
+      :src="state.options.logo || 'https://cdn.maximemoreillon.com/logo/thick/logo.png'">
 
     <v-app-bar-title>{{ state.options.title }}</v-app-bar-title>
 
@@ -54,7 +54,7 @@
 
 <script setup>
 import { ref, useSlots, computed } from 'vue'
-import { state, actions } from '@/templateStore'
+import { state, actions } from './templateStore'
 
 const slots = useSlots()
 const drawer = ref(false)

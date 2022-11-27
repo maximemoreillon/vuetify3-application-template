@@ -39,6 +39,17 @@ export default {
 
       }
     }
+  },
+  methods: {
+    userChangedCallback({user,jwt}) {
+
+      // Set Axios headers
+      this.axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`
+
+      // Store user info in Pinia
+
+      
+    }
   }
 }
 

@@ -22,12 +22,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { state } from '@/templateStore'
 
-import AppLayout from '@/components/AppLayout.vue'
-import AuthenticationWall from '@/components/AuthenticationWall.vue'
+import { computed, watch} from 'vue'
+import VueCookies from 'vue-cookies'
 
+import { state } from './templateStore'
+
+import AppLayout from './AppLayout.vue'
+import AuthenticationWall from './AuthenticationWall.vue'
+
+const emit = defineEmits(['userChanged'])
 const props = defineProps({
   options: { type: Object }
 })
@@ -38,6 +42,16 @@ state.options = props.options
 
 const authenticationRequired = computed(() => {
   return state.options.login_url && state.options.identification_url
+})
+
+const user = computed(() => state.user)
+
+watch( user, () => {
+  const eventData = {
+    user: user.value,
+    jwt: VueCookies.get('jwt')
+  } 
+  emit('userChanged', eventData)
 })
 
 
