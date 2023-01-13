@@ -8,7 +8,7 @@
 
     <!-- Default slot: Router view -->
     <RouterView />
-    
+
     <!-- Nav slot -->
     <template v-slot:nav>
       <v-list nav>
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import AppTemplate from 'vuetify3-application-template'
-import 'vuetify3-application-template/dist/style.css'
+import AppTemplate from '@moreillon/vuetify3-application-template'
+import '@moreillon/vuetify3-application-template/dist/style.css'
 
 export default {
   name: 'App',
@@ -36,7 +36,7 @@ export default {
         author: 'Maxime Moreillon',
         login_url: 'https://api.users.maximemoreillon.com/v2/auth/login',
         identification_url: 'https://api.users.maximemoreillon.com/v2/users/self',
-        // logo: 'src/assets/logo.png' 
+        // logo: 'src/assets/logo.png'
 
       }
     }
@@ -49,14 +49,13 @@ export default {
 
       // Store user info in Pinia
 
-      
+
     }
   }
 }
 
 </script>
 ```
-
 
 ## Dev commands
 
