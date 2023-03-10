@@ -1,6 +1,6 @@
 // Plugins
 import vue from "@vitejs/plugin-vue";
-import vuetify from "vite-plugin-vuetify";
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 // Utilities
 import { defineConfig } from "vite";
@@ -12,10 +12,15 @@ import { resolve } from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: { transformAssetUrls },
+    }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
       autoImport: true,
+      styles: {
+        configFile: "src/styles/settings.scss",
+      },
     }),
   ],
   define: { "process.env": {} },
@@ -28,10 +33,9 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  // Options to build an NPM package
   build: {
     lib: {
-      entry: resolve(__dirname, "src/"),
+      entry: resolve(__dirname, "src/layouts/appTemplate"),
       name: "AppTemplate",
       // the proper extensions will be added
       fileName: "vuetify3-application-template",

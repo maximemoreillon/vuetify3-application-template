@@ -27,7 +27,7 @@
   </v-snackbar>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive } from "vue";
 import { state, actions } from "./templateStore";
 
@@ -61,10 +61,11 @@ const login = async () => {
 
     // TODO: Store jwt in either cookies or localstorage according to options
     // TODO: secure, samesite, expires etc
+    // @ts-ignore
     VueCookies.set("jwt", jwt);
 
     await actions.getUser();
-  } catch (error) {
+  } catch (error: any) {
     snackbar.show = true;
     snackbar.color = "error";
 

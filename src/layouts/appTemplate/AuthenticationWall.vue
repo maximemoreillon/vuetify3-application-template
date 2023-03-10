@@ -37,7 +37,7 @@
   </v-main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { state, actions } from "./templateStore";
 
 import LoginForm from "./LoginForm.vue";
