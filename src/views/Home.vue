@@ -1,17 +1,7 @@
 <template>
-    <v-card>
-        <v-card-title>
-            Home
-        </v-card-title>
-        <v-card-text>
-            This is home. <img src="@/assets/logo.png" alt="">
-        </v-card-text>
-    </v-card>
+  <HelloWorld />
 </template>
 
-<script setup>
-
-import { ref } from 'vue';
-
-
+<script lang="ts" setup>
+  import HelloWorld from '@/components/HelloWorld.vue'
 </script>
