@@ -1,33 +1,20 @@
 {
-  "name": "@moreillon/vuetify3-application-template",
-  "version": "0.0.1",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/vuetify3-application-template.umd.cjs",
-  "module": "./dist/vuetify3-application-template.js",
-  "exports": {
-    ".": {
-      "import": "./dist/vuetify3-application-template.js",
-      "require": "./dist/vuetify3-application-template.umd.js"
-    },
-    "./dist/style.css": "./dist/style.css"
-  },
+  "name": "sampleApp",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
-    "axios": "^1.3.4",
+    "@moreillon/vuetify3-application-template": "file:moreillon-vuetify3-application-template-0.0.1.tgz",
     "core-js": "^3.8.3",
     "pinia": "^2.0.23",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
-    "vue-cookies": "^1.8.3",
     "vue-router": "^4.0.0",
     "vuetify": "^3.0.0",
     "webfontloader": "^1.0.0"

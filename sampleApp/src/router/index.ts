@@ -1,7 +1,8 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
 
-import AppTemplate from "@/layouts/appTemplate/AppTemplate.vue";
+import AppTemplate from "@moreillon/vuetify3-application-template";
+import "@moreillon/vuetify3-application-template/dist/style.css";
 const templateOptions = {
   title: "My application",
   author: "Maxime Moreillon",
@@ -11,9 +12,10 @@ const templateOptions = {
 const routes = [
   {
     path: "/",
-    // component: () => import('@/layouts/default/Default.vue'),
+    //component: () => import('@/layouts/default/Default.vue'),
     component: AppTemplate,
     props: { options: templateOptions },
+
     children: [
       {
         path: "",
