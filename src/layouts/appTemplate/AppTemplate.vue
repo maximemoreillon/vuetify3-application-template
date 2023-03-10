@@ -3,12 +3,19 @@
     <AuthenticationWall v-if="authenticationRequired && !state.user" />
 
     <template v-else>
-      <v-app-bar theme="dark">
-        <template v-slot:prepend v-if="navExists">
-          <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-app-bar color="#333333" theme="dark">
+        <template v-slot:prepend>
+          <v-app-bar-nav-icon @click="drawer = !drawer" v-if="navExists" />
+          <img
+            class="header_logo"
+            :class="{ rotating_logo: !state.options.logo }"
+            src="@/assets/logo.png"
+          />
         </template>
 
-        <v-app-bar-title>My app</v-app-bar-title>
+        <v-app-bar-title>{{
+          state.options.title || "Untitled application"
+        }}</v-app-bar-title>
 
         <slot name="header"></slot>
 
@@ -21,7 +28,7 @@
       <v-navigation-drawer v-model="drawer" v-if="navExists">
         <slot name="nav"></slot>
 
-        <template>
+        <template v-if="!slots.nav">
           <v-list nav>
             <v-list-item
               v-for="({ icon, title, to }, index) in state.options.nav"
@@ -36,7 +43,8 @@
 
       <v-main class="bg-grey-lighten-4">
         <v-container>
-          <router-view />
+          <slot />
+          <router-view v-if="!slots.default" />
         </v-container>
       </v-main>
 
@@ -74,9 +82,7 @@ const authenticationRequired = computed(
   () => state.options.login_url && state.options.identification_url
 );
 
-const navExists = computed(
-  () => state.options.nav // || slots.nav()[0].children.length
-);
+const navExists = computed(() => state.options.nav || slots.nav);
 
 const user = computed(() => state.user);
 
@@ -93,3 +99,26 @@ const { logout } = actions;
 
 const drawer = ref(false);
 </script>
+
+<style>
+.header_logo {
+  max-height: 2.5em;
+  object-fit: scale-down;
+}
+
+.rotating_logo {
+  animation-name: rotating_logo;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotating_logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>

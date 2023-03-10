@@ -1,7 +1,20 @@
 <template>
-  <router-view />
+  <AppTemplate :options="options">
+    <template v-slot:nav>
+      <v-list>
+        <v-list-item> </v-list-item>
+      </v-list>
+    </template>
+  </AppTemplate>
 </template>
 
 <script lang="ts" setup>
-  //
+import AppTemplate from "./layouts/appTemplate";
+import { ref } from "vue";
+const options = ref({
+  title: "Example application",
+  author: "Maxime Moreillon",
+  login_url: "https://api.users.maximemoreillon.com/v2/auth/login",
+  identification_url: "https://api.users.maximemoreillon.com/v2/users/self",
+});
 </script>
