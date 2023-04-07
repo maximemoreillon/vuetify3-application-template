@@ -7,8 +7,13 @@
         <template v-slot:prepend>
           <v-app-bar-nav-icon @click="drawer = !drawer" v-if="navExists" />
           <img
+            v-if="state.options.logo"
+            :src="state.options.logo"
             class="header_logo"
-            :class="{ rotating_logo: !state.options.logo }"
+          />
+          <img
+            v-else
+            class="header_logo rotating_logo"
             src="@/assets/logo.png"
           />
         </template>

@@ -14,7 +14,7 @@ import { ref } from "vue";
 const options = ref({
   title: "Example application",
   author: "Maxime Moreillon",
-  login_url: "https://api.users.maximemoreillon.com/v2/auth/login",
-  identification_url: "https://api.users.maximemoreillon.com/v2/users/self",
+  login_url: "https://api.users.maximemoreillon.com/auth/login",
+  identification_url: "https://api.users.maximemoreillon.com/users/self",
 });
 </script>

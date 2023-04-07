@@ -1,18 +1,16 @@
 <template>
-  <v-main class="bg-grey-lighten-4 main">
-    <!-- Adding padding for consistent white spaces -->
-    <v-card width="30rem" class="pa-0">
+  <v-main>
+    <v-card flat max-width="30rem" class="mx-auto mt-10">
       <v-card-text>
         <v-row justify="center">
-          <v-col cols="5">
+          <v-col cols="auto">
             <!-- TODO: use image from assets -->
-            <v-img
-              :class="{ rotating_logo: !state.options.logo }"
-              :src="
-                state.options.logo ||
-                'https://cdn.maximemoreillon.com/logo/thick/logo.png'
-              "
+            <img
+              v-if="state.options.logo"
+              :src="state.options.logo"
+              class="logo"
             />
+            <img v-else class="logo rotating_logo" src="@/assets/logo.png" />
           </v-col>
         </v-row>
         <v-row justify="center">
@@ -48,14 +46,16 @@ getUser();
 </script>
 
 <style scoped>
-.main {
+/* .main {
   display: flex;
   justify-content: center;
   align-items: center;
+} */
+img {
+  width: 20vmin;
+  height: 20vmin;
+  object-fit: contain;
 }
-</style>
-
-<style scoped>
 @keyframes rotating_logo {
   from {
     transform: rotate(0deg);
