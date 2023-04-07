@@ -4,7 +4,6 @@
       <v-card-text>
         <v-row justify="center">
           <v-col cols="auto">
-            <!-- TODO: use image from assets -->
             <img
               v-if="state.options.logo"
               :src="state.options.logo"

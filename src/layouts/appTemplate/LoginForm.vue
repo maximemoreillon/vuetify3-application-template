@@ -63,6 +63,8 @@ const login = async () => {
     // @ts-ignore
     VueCookies.set("jwt", jwt);
 
+    // TODO: consider setting axios headers here
+
     await actions.getUser();
   } catch (error: any) {
     snackbar.show = true;

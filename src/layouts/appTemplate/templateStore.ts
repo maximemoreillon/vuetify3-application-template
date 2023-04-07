@@ -26,12 +26,13 @@ export const actions = {
     try {
       state.authenticating = true;
 
+      // TODO: Look for token in LocalStorage if needed too
       // @ts-ignore
       const jwt = VueCookies.get(jwtKey);
-      // TODO: typing
-      const { identification_url: url } = state.options;
-      const headers = { authorization: `Bearer ${jwt}` };
-      const { data } = await axios.get(url, { headers });
+
+      const { identification_url } = state.options;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+      const { data } = await axios.get(identification_url);
 
       state.user = data;
     } catch (error) {

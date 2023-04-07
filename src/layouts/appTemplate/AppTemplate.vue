@@ -18,9 +18,9 @@
           />
         </template>
 
-        <v-app-bar-title>{{
-          state.options.title || "Untitled application"
-        }}</v-app-bar-title>
+        <v-app-bar-title>
+          {{ state.options.title || "Untitled application" }}
+        </v-app-bar-title>
 
         <slot name="header"></slot>
 
@@ -31,7 +31,7 @@
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" v-if="navExists">
-        <slot name="nav"></slot>
+        <slot name="nav" />
 
         <template v-if="!slots.nav">
           <v-list nav>
