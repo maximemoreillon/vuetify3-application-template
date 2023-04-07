@@ -13,16 +13,15 @@
       v-model="userInput.password"
     />
 
-    <v-btn dark type="submit" :loading="logging_in" prepend-icon="mdi-login">
+    <v-btn type="submit" :loading="logging_in" prepend-icon="mdi-login">
       Login
     </v-btn>
   </v-form>
 
-  <v-snackbar :color="snackbar.color" dark v-model="snackbar.show">
+  <v-snackbar :color="snackbar.color" v-model="snackbar.show">
     {{ snackbar.text }}
-
-    <template v-slot:action="{ attrs }">
-      <v-btn v-bind="attrs" @click="snackbar.show = false" icon="mdi-close" />
+    <template v-slot:actions>
+      <v-btn @click="snackbar.show = false" icon="mdi-close" />
     </template>
   </v-snackbar>
 </template>
