@@ -1,57 +1,27 @@
-# essentials
+# Vuetify 3 application template
 
-## Project setup
+Usage example:
 
+```vue
+<template>
+  <AppTemplate :options="options">
+    <template v-slot:nav>
+      <v-list>
+        <v-list-item> </v-list-item>
+      </v-list>
+    </template>
+  </AppTemplate>
+</template>
+
+<script lang="ts" setup>
+import AppTemplate from "@moreillon/vuetify3-application-template"
+import "@moreillon/vuetify3-application-template/dist/style.css"
+import { ref } from "vue"
+const options = ref({
+  title: "Example application",
+  author: "Maxime Moreillon",
+  login_url: "https://api.users.maximemoreillon.com/auth/login",
+  identification_url: "https://api.users.maximemoreillon.com/users/self",
+})
+</script>
 ```
-# yarn
-yarn
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-# yarn
-yarn dev
-
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-```
-
-### Compiles and minifies for production
-
-```
-# yarn
-yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-```
-
-### Lints and fixes files
-
-```
-# yarn
-yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
