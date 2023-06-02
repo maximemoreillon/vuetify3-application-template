@@ -102,7 +102,7 @@ watch(user, () => {
 
 const { logout } = actions;
 
-const drawer = ref(false);
+const drawer = ref(true);
 </script>
 
 <style>
