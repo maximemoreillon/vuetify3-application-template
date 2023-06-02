@@ -53,13 +53,27 @@
         </v-container>
       </v-main>
 
-      <v-footer app class="bg-grey-lighten-4 footer text-center">
-        <v-row justify="center">
-          <v-col cols="auto">
-            {{ state.options.title }} -
+      <v-footer app class="bg-grey-lighten-4 footer">
+        <slot name="footer" />
+        <template v-if="!slots.footer">
+          <span>
+            {{ state.options.title }}
+          </span>
+          <span class="mx-2">-</span>
+          <img
+            v-if="state.options.footerLogo"
+            class="footer_logo"
+            :src="state.options.footerLogo"
+          />
+          <img
+            v-else-if="state.options.footerLogo === undefined"
+            class="footer_logo rotating_logo"
+            src="@/assets/logo.png"
+          />
+          <span>
             {{ state.options.author || "Maxime Moreillon" }}
-          </v-col>
-        </v-row>
+          </span>
+        </template>
       </v-footer>
     </template>
   </v-app>
@@ -106,9 +120,21 @@ const drawer = ref(true);
 </script>
 
 <style>
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
 .header_logo {
   max-height: 2.5em;
   object-fit: scale-down;
+}
+
+.footer_logo {
+  height: 1.5em;
+  width: 1.5em;
 }
 
 .rotating_logo {
