@@ -3,7 +3,7 @@
     <AuthenticationWall v-if="authenticationRequired && !state.user" />
 
     <template v-else>
-      <v-app-bar color="#333333" theme="dark">
+      <v-app-bar :color="state.options.appBarColor || '#333333'" theme="dark">
         <template v-slot:prepend>
           <v-app-bar-nav-icon @click="drawer = !drawer" v-if="navExists" />
           <img
