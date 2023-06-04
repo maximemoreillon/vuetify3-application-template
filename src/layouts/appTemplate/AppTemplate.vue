@@ -53,7 +53,7 @@
         </v-container>
       </v-main>
 
-      <v-footer app class="bg-grey-lighten-4 footer">
+      <v-footer class="bg-grey-lighten-4 footer">
         <slot name="footer" />
         <template v-if="!slots.footer">
           <span>
