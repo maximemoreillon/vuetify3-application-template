@@ -53,7 +53,7 @@
         </v-container>
       </v-main>
 
-      <v-footer class="footer" height="auto">
+      <v-footer class="footer">
         <slot name="footer" />
         <template v-if="!slots.footer">
           <span>
@@ -121,7 +121,6 @@ const drawer = ref(true);
 
 <style>
 .footer {
-  background-color: red;
   display: flex;
   justify-content: center;
   align-items: center;
