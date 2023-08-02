@@ -5,7 +5,7 @@ publish:
   image: node:16
   stage: publish
   only:
-    - master
+    - tags
   tags:
     - moreillon
   script:
