@@ -6,7 +6,7 @@ import VueCookies from "vue-cookies";
 import axios from "axios";
 
 // IDEA: have a tokenOptions in state with location and key
-// IDEA 2: have a config file with tose settings
+// IDEA 2: have a config file with those settings
 // IDEA 2 is bad because token location can be set by user
 const jwtKey = "jwt";
 

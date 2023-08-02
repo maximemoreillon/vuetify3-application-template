@@ -46,14 +46,14 @@
         </template>
       </v-navigation-drawer>
 
-      <v-main class="bg-grey-lighten-4">
-        <v-container>
+      <v-main>
+        <v-container :fluid="state.options.fluid">
           <slot />
           <router-view v-if="!slots.default" />
         </v-container>
       </v-main>
 
-      <v-footer class="bg-grey-lighten-4 footer">
+      <v-footer class="footer" height="auto">
         <slot name="footer" />
         <template v-if="!slots.footer">
           <span>
@@ -94,7 +94,7 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  state.options = props.options;
+  state.options = { ...state.options, ...props.options };
 });
 
 const authenticationRequired = computed(
@@ -121,6 +121,7 @@ const drawer = ref(true);
 
 <style>
 .footer {
+  background-color: red;
   display: flex;
   justify-content: center;
   align-items: center;
