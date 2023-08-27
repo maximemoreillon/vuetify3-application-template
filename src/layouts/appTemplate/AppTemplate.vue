@@ -7,8 +7,8 @@
         <template v-slot:prepend>
           <v-app-bar-nav-icon @click="drawer = !drawer" v-if="navExists" />
           <img
-            v-if="state.options.logo"
-            :src="state.options.logo"
+            v-if="customHeaderLogo"
+            :src="customHeaderLogo"
             class="header_logo"
           />
           <img
@@ -102,8 +102,10 @@ const authenticationRequired = computed(
 );
 
 const navExists = computed(() => state.options.nav || slots.nav);
-
 const user = computed(() => state.user);
+const customHeaderLogo = computed(
+  () => state.options.header_logo || state.options.logo
+);
 
 watch(user, () => {
   const eventData = {
