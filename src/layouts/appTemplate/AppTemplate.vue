@@ -24,10 +24,11 @@
 
         <slot name="header"></slot>
 
-        <template v-slot:append v-if="state.user">
-          <!-- Can there be multiple items here? -->
-          <v-btn icon="mdi-logout" @click="logout()" />
+        <template v-slot:append>
           <ThemeToggler />
+          <template v-if="state.user">
+            <v-btn icon="mdi-logout" @click="logout()" />
+          </template>
         </template>
       </v-app-bar>
 
