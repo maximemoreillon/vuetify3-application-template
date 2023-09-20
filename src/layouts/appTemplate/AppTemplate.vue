@@ -26,7 +26,8 @@
 
         <template v-slot:append v-if="state.user">
           <!-- Can there be multiple items here? -->
-          <v-btn icon="mdi-logout" @click="logout()"></v-btn>
+          <v-btn icon="mdi-logout" @click="logout()" />
+          <ThemeToggler />
         </template>
       </v-app-bar>
 
@@ -86,6 +87,7 @@ import VueCookies from "vue-cookies";
 import { state, actions } from "./templateStore";
 
 import AuthenticationWall from "./AuthenticationWall.vue";
+import ThemeToggler from "./ThemeToggler.vue";
 
 const slots = useSlots();
 const emit = defineEmits(["userChanged"]);
@@ -127,6 +129,7 @@ const drawer = ref(true);
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+  max-height: 100px;
 }
 
 .header_logo {
