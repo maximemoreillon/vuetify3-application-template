@@ -13,7 +13,12 @@
       v-model="userInput.password"
     />
 
-    <v-btn type="submit" :loading="logging_in" prepend-icon="mdi-login">
+    <v-btn
+      type="submit"
+      :loading="logging_in"
+      prepend-icon="mdi-login"
+      color="primary"
+    >
       Login
     </v-btn>
   </v-form>
