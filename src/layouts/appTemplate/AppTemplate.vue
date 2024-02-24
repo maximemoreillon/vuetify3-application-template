@@ -130,7 +130,7 @@ const drawer = ref(true);
   justify-content: center;
   align-items: center;
   gap: 0.5em;
-  max-height: 100px;
+  max-height: 5em;
 }
 
 .header_logo {
