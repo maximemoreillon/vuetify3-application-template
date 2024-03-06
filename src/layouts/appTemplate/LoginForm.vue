@@ -6,7 +6,7 @@
           prepend-icon="mdi-account"
           label="Username"
           v-model="userInput.identifier"
-          :hint="state.options.auth.username_hint"
+          :hint="state.options.username_hint"
           persistent-hint
         />
       </v-col>
@@ -18,7 +18,7 @@
           label="Password"
           type="Password"
           v-model="userInput.password"
-          :hint="state.options.auth.password_hint"
+          :hint="state.options.password_hint"
           persistent-hint
         />
       </v-col>
