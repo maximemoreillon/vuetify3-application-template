@@ -1,4 +1,5 @@
 // A custom store without using Pinia
+// TODO: use Pinia
 import { reactive } from "vue";
 import VueCookies from "vue-cookies";
 

@@ -16,5 +16,6 @@ const options = ref({
   author: "Maxime Moreillon",
   login_url: "https://api.users.maximemoreillon.com/auth/login",
   identification_url: "https://api.users.maximemoreillon.com/users/self",
+  auth: {},
 });
 </script>

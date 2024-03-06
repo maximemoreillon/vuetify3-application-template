@@ -1,26 +1,40 @@
 <template>
-  <v-form class="text-center" @submit.prevent="login()">
-    <v-text-field
-      prepend-icon="mdi-account"
-      label="Username"
-      v-model="userInput.identifier"
-    />
-
-    <v-text-field
-      prepend-icon="mdi-lock"
-      label="Password"
-      type="Password"
-      v-model="userInput.password"
-    />
-
-    <v-btn
-      type="submit"
-      :loading="logging_in"
-      prepend-icon="mdi-login"
-      color="primary"
-    >
-      Login
-    </v-btn>
+  <v-form @submit.prevent="login()">
+    <v-row>
+      <v-col>
+        <v-text-field
+          prepend-icon="mdi-account"
+          label="Username"
+          v-model="userInput.identifier"
+          :hint="state.options.auth.username_hint"
+          persistent-hint
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-text-field
+          prepend-icon="mdi-lock"
+          label="Password"
+          type="Password"
+          v-model="userInput.password"
+          :hint="state.options.auth.password_hint"
+          persistent-hint
+        />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="auto">
+        <v-btn
+          type="submit"
+          :loading="logging_in"
+          prepend-icon="mdi-login"
+          color="primary"
+        >
+          Login
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-form>
 
   <v-snackbar :color="snackbar.color" v-model="snackbar.show">
