@@ -26,18 +26,7 @@ const options = ref({
 })
 
 async function handleUserChanged({ user, jwt }: any) {
-  if (!user) return
-  userStore.user = user
-
-  axios.interceptors.request.use(
-    (config: any) => {
-      config.headers = {
-        Authorization: `Bearer ${jwt}`,
-      }
-      return config
-    },
-    (error: any) => Promise.reject(error)
-  )
+  // Do something with user info or JWT
 }
 </script>
 ```
