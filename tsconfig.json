@@ -25,5 +25,6 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite.config.ts"
-  ]
+  ],
+  "exclude": ["dist", "node_modules", "cypress"]
 }

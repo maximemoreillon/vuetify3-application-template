@@ -4,13 +4,15 @@ Usage example:
 
 ```vue
 <template>
-  <AppTemplate :options="options" @userChanged="handleUserChanged($event)">
-    <template v-slot:nav>
-      <v-list>
-        <v-list-item> </v-list-item>
-      </v-list>
-    </template>
-  </AppTemplate>
+  <v-app>
+    <AppTemplate :options="options" @userChanged="handleUserChanged($event)">
+      <template v-slot:nav>
+        <v-list>
+          <v-list-item> </v-list-item>
+        </v-list>
+      </template>
+    </AppTemplate>
+  </v-app>
 </template>
 
 <script lang="ts" setup>

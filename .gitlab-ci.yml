@@ -2,7 +2,7 @@ stages:
   - publish
 
 publish:
-  image: node:16
+  image: node:20
   stage: publish
   only:
     - tags

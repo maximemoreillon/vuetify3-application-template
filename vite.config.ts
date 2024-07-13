@@ -16,12 +16,7 @@ export default defineConfig({
       template: { transformAssetUrls },
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
-    vuetify({
-      autoImport: true,
-      styles: {
-        configFile: "src/styles/settings.scss",
-      },
-    }),
+    vuetify(),
   ],
   define: { "process.env": {} },
   resolve: {
@@ -33,9 +28,11 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+
+  // Settings for building and publishing to NPM
   build: {
     lib: {
-      entry: resolve(__dirname, "src/layouts/appTemplate"),
+      entry: resolve(__dirname, "src"),
       name: "AppTemplate",
       // the proper extensions will be added
       fileName: "vuetify3-application-template",
