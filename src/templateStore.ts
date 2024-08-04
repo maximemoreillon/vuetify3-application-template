@@ -13,7 +13,9 @@ const jwtKey = "jwt";
 
 export const state = reactive<any>({
   // Could have default options here
-  options: {},
+  options: {
+    footer: true,
+  },
   user: null,
 
   // This would be more of an AuthWall thing

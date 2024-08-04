@@ -20,5 +20,6 @@ const options = ref({
   identification_url: "https://api.users.maximemoreillon.com/users/self",
   username_hint: "Test hint for username",
   password_hint: "Test hint for password",
+  // footer: false,
 });
 </script>

@@ -51,7 +51,7 @@
       </v-container>
     </v-main>
 
-    <v-footer class="footer">
+    <v-footer class="footer" v-if="state.options.footer">
       <slot name="footer" />
       <template v-if="!slots.footer">
         <span>
