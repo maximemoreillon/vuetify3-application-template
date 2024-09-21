@@ -22,7 +22,7 @@
 
       <template v-slot:append>
         <ThemeToggler />
-        <template v-if="state.user">
+        <template v-if="state.user && state.options.login_url">
           <v-btn icon="mdi-logout" @click="logout()" />
         </template>
       </template>
@@ -51,7 +51,7 @@
       </v-container>
     </v-main>
 
-    <v-footer class="footer">
+    <v-footer class="footer" v-if="state.options.footer">
       <slot name="footer" />
       <template v-if="!slots.footer">
         <span>
@@ -97,7 +97,9 @@ onMounted(() => {
 });
 
 const authenticationRequired = computed(
-  () => state.options.login_url && state.options.identification_url
+  () =>
+    (state.options.login_url && state.options.identification_url) ||
+    (state.options.oidc_authority && state.options.oidc_client_id)
 );
 
 const navExists = computed(() => state.options.nav || slots.nav);
@@ -106,14 +108,21 @@ const customHeaderLogo = computed(
   () => state.options.header_logo || state.options.logo
 );
 
-watch(user, () => {
-  const eventData = {
-    user: user.value,
-    // @ts-ignore
-    jwt: VueCookies.get("jwt"),
-  };
-  emit("userChanged", eventData);
-});
+watch(
+  user,
+  () => {
+    const eventData: any = {
+      user: user.value,
+    };
+
+    if (state.options.login_url) {
+      eventData.jwt = (VueCookies as any).get("jwt");
+    }
+
+    emit("userChanged", eventData);
+  },
+  { deep: true }
+);
 
 const { logout } = actions;
 
