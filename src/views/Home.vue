@@ -42,9 +42,11 @@ import axios from "axios";
 import { onMounted } from "vue";
 
 onMounted(async () => {
-  const { data } = await axios.get(
-    "https://api.users.maximemoreillon.com/users/self"
-  );
-  console.log(data);
+  try {
+    const { data } = await axios.get("http://192.168.1.2:7070");
+    console.log(data);
+  } catch (error: any) {
+    console.error(error.response?.data);
+  }
 });
 </script>

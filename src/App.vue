@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppTemplate :options="options">
+    <AppTemplate :options="options" @user-changed="handleUserChanged($event)">
       <template v-slot:nav>
         <v-list>
           <v-list-item> Home </v-list-item>
@@ -13,6 +13,8 @@
 <script lang="ts" setup>
 import AppTemplate from "@/AppTemplate.vue";
 import { ref } from "vue";
+import axios from "axios";
+
 const options = ref({
   title: "Example application",
   author: "Maxime Moreillon",
@@ -24,4 +26,10 @@ const options = ref({
   oidc_client_id: import.meta.env.VITE_OIDC_CLIENT_ID,
   // footer: false,
 });
+
+function handleUserChanged({ user }: any) {
+  if (user.id_token)
+    axios.defaults.headers.common["Authorization"] = `Bearer ${user.id_token}`;
+  else axios.defaults.headers.common["Authorization"] = undefined;
+}
 </script>
