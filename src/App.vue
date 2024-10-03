@@ -22,14 +22,23 @@ const options = ref({
   // identification_url: "https://api.users.maximemoreillon.com/users/self",
   username_hint: "Test hint for username",
   password_hint: "Test hint for password",
-  oidc_authority: import.meta.env.VITE_OIDC_AUTHORITY,
-  oidc_client_id: import.meta.env.VITE_OIDC_CLIENT_ID,
+  oidc: {
+    authority: import.meta.env.VITE_OIDC_AUTHORITY,
+    client_id: import.meta.env.VITE_OIDC_CLIENT_ID,
+    extraQueryParams: {
+      audience: import.meta.env.VITE_OIDC_AUDIENCE,
+    },
+  },
+
   // footer: false,
 });
 
 function handleUserChanged({ user }: any) {
-  if (user.id_token)
-    axios.defaults.headers.common["Authorization"] = `Bearer ${user.id_token}`;
+  console.log(user.access_token);
+  if (user.access_token)
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${user.access_token}`;
   else axios.defaults.headers.common["Authorization"] = undefined;
 }
 </script>

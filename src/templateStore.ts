@@ -12,7 +12,15 @@ import axios from "axios";
 // IDEA 2 is bad because token location can be set by user
 const jwtKey = "jwt";
 
-export const state = reactive<any>({
+// TODO: typing
+type State = {
+  options: any;
+  user: any;
+  authenticating: boolean;
+  oidcAuth?: OidcAuth;
+};
+
+export const state = reactive<State>({
   // Could have default options here
   options: {
     footer: true,
@@ -22,6 +30,8 @@ export const state = reactive<any>({
   // This would be more of an AuthWall thing
   // But actually used here
   authenticating: false,
+
+  oidcAuth: undefined,
 });
 
 const getUserLegacy = async () => {
@@ -50,30 +60,25 @@ const getUserLegacy = async () => {
 const getUserOidc = async () => {
   state.authenticating = true;
 
-  const { oidc_authority, oidc_client_id } = state.options;
+  if (!state.options.oidc) throw Error("Missing OIDC configuration");
 
-  const oidcOptions = {
-    authority: oidc_authority,
-    client_id: oidc_client_id,
-  };
+  state.oidcAuth = new OidcAuth(state.options.oidc);
 
-  const auth = new OidcAuth(oidcOptions);
-  auth.init().then((user) => {
+  state.oidcAuth.init().then((user: any) => {
     if (!user) return;
     state.user = user;
   });
 
-  auth.userManager.events.addUserLoaded((user) => {
+  state.oidcAuth.userManager.events.addUserLoaded((user: any) => {
     state.user = user;
   });
 };
 
 export const actions = {
   async getUser() {
-    const { identification_url, oidc_authority, oidc_client_id } =
-      state.options;
+    const { identification_url, oidc } = state.options;
 
-    if (oidc_authority && oidc_client_id) {
+    if (oidc?.authority && oidc?.client_id) {
       console.log("Getting user with OIDC");
       await getUserOidc();
     } else if (identification_url) {
@@ -84,8 +89,12 @@ export const actions = {
   },
 
   async logout() {
-    // @ts-ignore
-    VueCookies.remove(jwtKey);
-    actions.getUser();
+    if (state.oidcAuth) {
+      state.oidcAuth.userManager.signoutRedirect();
+    } else {
+      // @ts-ignore
+      VueCookies.remove(jwtKey);
+      actions.getUser();
+    }
   },
 };

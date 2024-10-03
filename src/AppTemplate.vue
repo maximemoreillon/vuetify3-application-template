@@ -22,7 +22,7 @@
 
       <template v-slot:append>
         <ThemeToggler />
-        <template v-if="state.user && state.options.login_url">
+        <template v-if="state.user">
           <v-btn icon="mdi-logout" @click="logout()" />
         </template>
       </template>
@@ -99,7 +99,7 @@ onMounted(() => {
 const authenticationRequired = computed(
   () =>
     (state.options.login_url && state.options.identification_url) ||
-    (state.options.oidc_authority && state.options.oidc_client_id)
+    (state.options.oidc?.authority && state.options.oidc?.client_id)
 );
 
 const navExists = computed(() => state.options.nav || slots.nav);
