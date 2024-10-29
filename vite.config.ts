@@ -9,6 +9,9 @@ import { fileURLToPath, URL } from "node:url";
 // Added for NPM publish
 import { resolve } from "path";
 
+// https://stackoverflow.com/a/73123436
+import dts from "vite-plugin-dts";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -17,6 +20,9 @@ export default defineConfig({
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify(),
+    dts({
+      insertTypesEntry: true,
+    }),
   ],
   define: { "process.env": {} },
   resolve: {
