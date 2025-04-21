@@ -7,6 +7,7 @@
   ],
   "main": "./dist/vuetify3-application-template.umd.cjs",
   "module": "./dist/vuetify3-application-template.js",
+  "types": "./dist/vuetify3-application-template.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vuetify3-application-template.js",
@@ -27,7 +28,6 @@
     "core-js": "^3.8.3",
     "pinia": "^2.0.23",
     "roboto-fontface": "*",
-    "vite-plugin-dts": "^4.3.0",
     "vue": "^3.4.31",
     "vue-cookies": "^1.8.3",
     "vue-router": "^4.0.0",
