@@ -1,5 +1,6 @@
-// A custom store without using Pinia
-// TODO: use Pinia
+// A custom store
+// TODO: use Pinia or composables
+
 import { reactive } from "vue";
 import VueCookies from "vue-cookies";
 import OidcAuth from "@moreillon/oidc-auth";
@@ -12,12 +13,13 @@ import axios from "axios";
 // IDEA 2 is bad because token location can be set by user
 const jwtKey = "jwt";
 
+let oidcAuth: OidcAuth;
+
 // TODO: typing
 type State = {
   options: any;
   user: any;
   authenticating: boolean;
-  oidcAuth?: OidcAuth;
 };
 
 export const state = reactive<State>({
@@ -30,8 +32,6 @@ export const state = reactive<State>({
   // This would be more of an AuthWall thing
   // But actually used here
   authenticating: false,
-
-  oidcAuth: undefined,
 });
 
 const getUserLegacy = async () => {
@@ -62,15 +62,18 @@ const getUserOidc = async () => {
 
   if (!state.options.oidc) throw Error("Missing OIDC configuration");
 
-  state.oidcAuth = new OidcAuth(state.options.oidc);
+  oidcAuth = new OidcAuth(state.options.oidc);
 
-  state.oidcAuth.init().then((user: any) => {
+  oidcAuth.init().then((user) => {
     if (!user) return;
     state.user = user;
-  });
 
-  state.oidcAuth.userManager.events.addUserLoaded((user: any) => {
-    state.user = user;
+    // Weird that TS complainbs about state.oidcAuth being potenially undefined...
+    if (oidcAuth)
+      oidcAuth.onTokenRefreshed((oidcData) => {
+        // TODO: figure out what is in there
+        state.user = { ...state.user, ...oidcData };
+      });
   });
 };
 
@@ -89,8 +92,10 @@ export const actions = {
   },
 
   async logout() {
-    if (state.oidcAuth) {
-      state.oidcAuth.userManager.signoutRedirect();
+    if (oidcAuth) {
+      // state.oidcAuth.userManager.signoutRedirect();
+      // TODO: implement
+      alert("Not implemented");
     } else {
       // @ts-ignore
       VueCookies.remove(jwtKey);

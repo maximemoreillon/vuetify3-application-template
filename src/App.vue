@@ -20,8 +20,8 @@ const options = ref({
   author: "Maxime Moreillon",
   // login_url: "https://api.users.maximemoreillon.com/auth/login",
   // identification_url: "https://api.users.maximemoreillon.com/users/self",
-  username_hint: "Test hint for username",
-  password_hint: "Test hint for password",
+  // username_hint: "Test hint for username",
+  // password_hint: "Test hint for password",
   oidc: {
     authority: import.meta.env.VITE_OIDC_AUTHORITY,
     client_id: import.meta.env.VITE_OIDC_CLIENT_ID,
@@ -34,7 +34,7 @@ const options = ref({
 });
 
 function handleUserChanged({ user }: any) {
-  console.log(user.access_token);
+  console.log(user);
   if (user.access_token)
     axios.defaults.headers.common[
       "Authorization"
